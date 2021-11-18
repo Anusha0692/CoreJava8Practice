@@ -53,19 +53,38 @@ public static void main(String[] args) {
 		 System.out.println(emp.getEmpName()+"="+emp.getEmpAge());
 	 }
 	 
-	 System.out.println("Lamda Java8 After Sort ");
+	 System.out.println("*********Lamda Java8 After Sort *********");
 	 employeeList.sort((Employee e1, Employee e2)->e1.getEmpAge()-e2.getEmpAge()); 
 	 employeeList.forEach((emp) -> System.out.println(emp.getEmpName()+"=="+emp.getEmpAge()));
 	 
-	 System.out.println("Lamda Java8 Number of employees with Same age ");
+	 
+	 System.out.println("*********Lamda Java8 Number of employees with Same age******");
 	 Map<Integer, Long> cardsMap = employeeList
 	            .stream()
 	            .collect(Collectors.groupingBy(Employee::getEmpAge, Collectors.counting()));
-	 cardsMap.forEach((k,v)->System.out.println("Age: " + k + ", Name: " + v));
+	 cardsMap.forEach((k,v)->System.out.println("Age: " + k + ", count: " + v));
 	 
+	 
+	 
+	System.out.println("****aggeragate operations****sum of emp age*****");
 	
-	                                   
-	 
+	double sumofAges=employeeList.stream().collect(Collectors.summingDouble(emp->emp.getEmpAge()));
+	      System.out.println("sumofAges=="+sumofAges);
+	      
+	  	System.out.println("****aggeragate operations****min*****");   
+	  	Employee minAge=employeeList.stream().min((e1,e2)-> e1.getEmpAge()>e2.getEmpAge()?1:-1).get();
+	  	System.out.println("MinAge=="+minAge.getEmpAge());
+	  	
+	  	Employee MaxAge=employeeList.stream().max((e1,e2)->e1.getEmpAge()>e2.getEmpAge()?1:-1).get();
+	  	System.out.println("MaxAge=="+minAge.getEmpAge()); 
+	  	
+	  	long count=employeeList.stream().filter(emp->emp.getEmpAge()<30).count();
+	  	System.out.println("count=="+count); 
+	  	
+	  	double averageofAges=employeeList.stream().collect(Collectors.averagingDouble(emp->emp.getEmpAge()));
+	      System.out.println("sumofAges=="+averageofAges);
+	      
+	      
 	 
 //	 Map<Integer, Long> cardsMap1 = employeeList
 //	            .stream().filter(emp->emp.getEmpAge()>18)
