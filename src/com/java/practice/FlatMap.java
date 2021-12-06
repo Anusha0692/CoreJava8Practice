@@ -22,7 +22,7 @@ public class FlatMap {
 		      System.out.println(s);
 		  }
 		  
-		  System.out.println("-----Filter oot the 'a' from 2d Array-----");
+		  System.out.println("-----Filter out the 'a' from 2d Array-----");
 		  
 		  // filter out the a from 2d Array
 		  List<String> collect = Stream.of(array)     // Stream<String[]>

@@ -6,7 +6,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class ComparatorExample{
@@ -64,6 +66,10 @@ public static void main(String[] args) {
 	            .collect(Collectors.groupingBy(Employee::getEmpAge, Collectors.counting()));
 	 cardsMap.forEach((k,v)->System.out.println("Age: " + k + ", count: " + v));
 	 
+	 //Find Employee salaries who are having more than 50k salary and add 10k hike to those employees.
+	 List<Integer> addIncrement =employeeList.stream().filter(e->e.getEmpAge() >30).map(e ->e.getEmpAge()+10).collect(Collectors.toList());
+	 System.out.println("processed list,addIncrement: " + addIncrement);
+	 
 	 
 	 
 	System.out.println("****aggeragate operations****sum of emp age*****");
@@ -84,7 +90,54 @@ public static void main(String[] args) {
 	  	double averageofAges=employeeList.stream().collect(Collectors.averagingDouble(emp->emp.getEmpAge()));
 	      System.out.println("sumofAges=="+averageofAges);
 	      
+	     // Write a Java 8 program to square the list of numbers and then filter out the numbers greater than 100 and then find the average of the remaining numbers?//
 	      
+	      Integer[] arr = new Integer[] { 100, 100, 9, 8, 200 };
+	        List<Integer> list = Arrays.asList(arr);
+	        // Stored the array as list
+	        OptionalDouble avg = list.stream().mapToInt(n -> n * n).filter(n -> n> 100).average();
+	         
+	        /* Converted it into Stream and filtered out the numbers
+	            which are greater than 100. Finally calculated the average 
+	        */
+	        
+	        if (avg.isPresent())
+	            System.out.println(avg.getAsDouble());
+	    
+	      
+
+
+
+Integer highest = Stream.of(1, 2, 3, 77, 6, 5)
+.max(Comparator.comparing(Integer::valueOf))
+.get();
+System.out.println("The highest number is: " + highest);
+/* We have used max() method with Comparator.comparing() method
+to compare and find the highest number 
+*/
+
+Integer lowest = Stream.of(1, 2, 3, 77, 6, 5)
+.min(Comparator.comparing(Integer::valueOf))
+.get();
+
+/* We have used max() method with Comparator.comparing() method
+to compare and find the highest number 
+*/
+
+
+System.out.println("The lowest number is: " + lowest);
+	
+	      
+	  //You have given list of employees, find out all the employees whose designation is “Manager” and age is above 30.
+	      
+	   System.out.println("**********names of those employees whose age is more than 25 in java8 ***********");
+	    
+	      List<Employee> tempList = employeeList.stream()
+          .filter(e ->  e.getEmpAge() > 25)
+          .collect(Collectors.toList());
+	      
+          
+        tempList.forEach(e -> System.out.println("Names : " + e.getEmpName() + " , Age : " + e.getEmpAge()));       
 	 
 //	 Map<Integer, Long> cardsMap1 = employeeList
 //	            .stream().filter(emp->emp.getEmpAge()>18)
@@ -114,3 +167,4 @@ public static void main(String[] args) {
 	 
 }
 }
+

@@ -22,6 +22,6 @@ public class FirstNonRepeatedCharacter {
 	  System.out.println(entry.getKey()+"=="+entry.getValue());
   }
 
-	}
+}
 
 }
